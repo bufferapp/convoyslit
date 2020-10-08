@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: convoyslit-ingress
+spec:
+  rules:
+    - host: convoyslit.buffer.com
+      http:
+        paths:
+          - backend:
+              serviceName: convoyslit-service
+              servicePort: 80
+  tls:
+    - secretName: tls-secret

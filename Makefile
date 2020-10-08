@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := run
 
-IMAGE_NAME := gcr.io/buffer-data/convoyslit:latest
+IMAGE_NAME := gcr.io/buffer-data/convoyslit:hello
 
 GCLOUD_CONFIG_FLAG = -v $(HOME)/.config/gcloud/:/root/.config/gcloud
 
@@ -20,3 +20,7 @@ dev:
 .PHONY: push
 push: build
 	docker push $(IMAGE_NAME)
+
+.PHONY: deploy
+deploy: push
+	kubectl apply -f kubernetes/
