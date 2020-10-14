@@ -9,4 +9,6 @@ spec:
       targetPort: 8501
   selector:
     app: convoyslit
-  type: NodePort
+  type: LoadBalancer
+  loadBalancerSourceRanges:
+    - 52.23.94.19/32
