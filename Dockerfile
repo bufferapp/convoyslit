@@ -1,4 +1,4 @@
-FROM python:3
+FROM python:3.8
 
 RUN pip install --no-cache-dir streamlit convoys numpy pandas matplotlib pandas-gbq google-cloud-bigquery-storage
 
