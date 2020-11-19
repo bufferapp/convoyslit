@@ -7,18 +7,26 @@ from matplotlib import pyplot
 from convoys import utils as cu
 from convoys import plotting as cp
 
+
+@st.cache
+def read_data():
+    df = pd.read_gbq(query, project_id="buffer-data")
+    return df
+
+
 st.title("ConvoysLit")
 
-query = st.text_area("Query", height=500)
+query = st.text_area("Query", height=300)
 
-df = pd.read_gbq(query, project_id="buffer-data")
+if st.button("RUN"):
+    df = read_data()
 
-fig, ax = pyplot.subplots()
+    fig, ax = pyplot.subplots()
 
-_, groups, (G, B, T) = convoys.utils.get_arrays(
-    df, groups="g", created="created_at", converted="converted_at"
-)
+    _, groups, (G, B, T) = convoys.utils.get_arrays(
+        df, groups="g", created="created_at", converted="converted_at"
+    )
 
-convoys.plotting.plot_cohorts(G, B, T, model="kaplan-meier", groups=groups, ax=ax)
+    convoys.plotting.plot_cohorts(G, B, T, model="kaplan-meier", groups=groups, ax=ax)
 
-st.pyplot(fig)
+    st.pyplot(fig)

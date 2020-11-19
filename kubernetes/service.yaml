@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   name: convoyslit-service
+  annotations:
+    cloud.google.com/backend-config: '{"default": "convoyslit-backendconfig"}'
 spec:
   ports:
     - protocol: TCP
@@ -9,6 +11,4 @@ spec:
       targetPort: 8501
   selector:
     app: convoyslit
-  type: LoadBalancer
-  loadBalancerSourceRanges:
-    - 52.23.94.19/32
+  type: NodePort
