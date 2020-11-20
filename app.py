@@ -2,10 +2,11 @@ import numpy as np
 import pandas as pd
 import convoys
 
+import convoys.utils
+import convoys.multi
+
 import streamlit as st
-from matplotlib import pyplot
-from convoys import utils as cu
-from convoys import plotting as cp
+import altair as alt
 
 
 @st.cache
@@ -21,12 +22,31 @@ query = st.text_area("Query", height=300)
 if st.button("RUN"):
     df = read_data()
 
-    fig, ax = pyplot.subplots()
-
     _, groups, (G, B, T) = convoys.utils.get_arrays(
         df, groups="g", created="created_at", converted="converted_at"
     )
 
-    convoys.plotting.plot_cohorts(G, B, T, model="kaplan-meier", groups=groups, ax=ax)
+    m = convoys.multi.KaplanMeier()
+    m.fit(G, B, T)
 
-    st.pyplot(fig)
+    t_max = max(1, max(T))
+    t = np.linspace(0, t_max, 1000)
+
+    df = pd.DataFrame(index=t)
+
+    for i, group in enumerate(groups):
+        j = groups.index(group)
+        p_y = m.predict(j, t).T
+        df[str(group)] = p_y
+
+    chart = (
+        alt.Chart(df.reset_index().melt("index"))
+        .mark_line()
+        .encode(x="index", y="value", color="variable")
+        .interactive()
+        .properties(height=600)
+        .configure_axis(labelFontSize=20, titleFontSize=20)
+        .configure_line(size=5)
+    )
+
+    st.altair_chart(chart, use_container_width=True)
