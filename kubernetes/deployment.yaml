@@ -13,7 +13,19 @@ spec:
         app: convoyslit
     spec:
       containers:
-        - image: gcr.io/buffer-data/convoyslit:hello
+        - image: gcr.io/buffer-data/convoyslit:0.8.0
           imagePullPolicy: Always
           name: convoyslit
+          volumeMounts:
+            - name: bigquery-google-cloud-credentials
+              mountPath: /var/secrets/google
+          env:
+            - name: GOOGLE_APPLICATION_CREDENTIALS
+              value: /var/secrets/google/key.json
+            - name: GOOGLE_CLOUD_PROJECT
+              value: buffer-data
       restartPolicy: Always
+      volumes:
+        - name: bigquery-google-cloud-credentials
+          secret:
+            secretName: bigquery-key

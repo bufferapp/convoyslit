@@ -6,4 +6,4 @@ COPY app.py /app/
 
 WORKDIR /app
 
-CMD ["streamlit",  "hello"]
+CMD ["streamlit",  "run", "app.py"]
