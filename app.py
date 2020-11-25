@@ -1,12 +1,10 @@
+import altair as alt
+import convoys
+import convoys.multi
+import convoys.utils
 import numpy as np
 import pandas as pd
-import convoys
-
-import convoys.utils
-import convoys.multi
-
 import streamlit as st
-import altair as alt
 
 
 @st.cache
@@ -16,6 +14,16 @@ def read_data():
 
 
 st.title("ConvoysLit")
+
+"""
+### Query
+
+You can query BigQuery in the following form. The query must return at the following fields:
+- A `created_at` field
+- A `converted_at` field
+- A `g` field with the assigned group 
+
+"""
 
 query = st.text_area("Query", height=300)
 
