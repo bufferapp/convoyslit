@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := run
 
-IMAGE_NAME := gcr.io/buffer-data/convoyslit:0.8.0
+IMAGE_NAME := gcr.io/buffer-data/convoyslit:0.8.1
 
 GCLOUD_CONFIG_FLAG = -v $(HOME)/.config/gcloud/:/root/.config/gcloud
 

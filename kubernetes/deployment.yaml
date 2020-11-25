@@ -13,7 +13,7 @@ spec:
         app: convoyslit
     spec:
       containers:
-        - image: gcr.io/buffer-data/convoyslit:0.8.0
+        - image: gcr.io/buffer-data/convoyslit:0.8.1
           imagePullPolicy: Always
           name: convoyslit
           volumeMounts:
