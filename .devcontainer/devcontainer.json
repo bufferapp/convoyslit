@@ -1,0 +1,22 @@
+{
+	"name": "convoyslit",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"context": ".."
+	},
+	"settings": {},
+	"extensions": [
+		"ms-python.python",
+		"editorconfig.editorconfig",
+		"github.copilot",
+		"github.vscode-pull-request-github",
+		"eamodio.gitlens",
+		"ms-toolsai.jupyter",
+		"ms-python.vscode-pylance",
+		"visualstudioexptteam.vscodeintellicode"
+	],
+	"forwardPorts": [
+		8501
+	],
+	"remoteUser": "vscode"
+}

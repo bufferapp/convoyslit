@@ -1,0 +1,7 @@
+altair
+convoys
+google-cloud-bigquery-storage
+numpy
+pandas-gbq
+pandas
+streamlit
